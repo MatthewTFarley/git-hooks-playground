@@ -1,0 +1,6 @@
+{
+  "name": "git-hooks-playground",
+  "version": "1.0.0",
+  "description": "A Git Hooks playground",
+  "main": "index.js"
+}
