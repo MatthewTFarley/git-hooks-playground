@@ -1,5 +1,3 @@
-var x = 1;
-
-if (x) {
-  console.log(true);
+export function foo() {
+  return "foo";
 }
