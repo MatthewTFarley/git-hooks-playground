@@ -2,5 +2,8 @@
   "name": "git-hooks-playground",
   "version": "1.0.0",
   "description": "A Git Hooks playground",
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "lint-staged": "^13.2.2"
+  }
 }
