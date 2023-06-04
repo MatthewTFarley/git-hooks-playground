@@ -1,6 +1,12 @@
-import { it, expect } from "vitest";
-import { foo } from ".";
+import { describe, expect, it } from "vitest";
+import { bar, foo } from ".";
 
-it("works", () => {
-  expect(foo()).toEqual("foo");
+describe("foo", () => {
+  it('returns "foo"', () => {
+    expect(foo()).toEqual("foo");
+  });
+
+  it('returns "bar"', () => {
+    expect(bar()).toEqual("bar");
+  });
 });
