@@ -6,17 +6,21 @@ echo "husky - running pre-push hook"
 # Turn off immediate exit on error.
 set +e
 
-# Get the diff of the current branch and its upstream branch and store it in
-# the "difference" variable. This will exit nonzero if there is no upstream set.
-difference=$(git diff @{push} --name-only 2>&1 | (read difference; echo $difference ))
+# Get the diff of the current branch's most recent commit and its upstream
+# branch and store it in the "difference" variable. This will exit nonzero if
+# there is no upstream set.
+difference=$(git diff $(git rev-parse --short HEAD) @{push} --name-only 2>&1 | (read difference; echo $difference ))
 # Capture the exit code of the git diff command.
 result=$?
 
 # Turn on immediate exit on error.
 set -e
 
-if [ $result -ne 0 ]; then
-  if [ $result -eq 128 ]; then
+success_exit_code=0
+no_upstream_set_exit_code=128
+
+if [ $result -ne $success_exit_code ]; then
+  if [ $result -eq $no_upstream_set_exit_code ]; then
     echo 'husky - No upstream branch set. Skipping test run.'
   else
     echo $difference
@@ -25,10 +29,10 @@ if [ $result -ne 0 ]; then
   fi
 else
   if [ "$difference" == "" ]; then
-    echo $difference
     echo 'husky - No difference to upstream branch. Skipping test run.'
   else
-    echo "husky - running related tests for files \"$difference\""
+    echo "husky - running related tests for changed files \"$difference\""
+
     pnpm vitest related --run $difference
   fi
 fi

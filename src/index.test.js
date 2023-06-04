@@ -9,4 +9,8 @@ describe("foo", () => {
   it('returns "bar"', () => {
     expect(bar()).toEqual("bar");
   });
+
+  it("wins", () => {
+    expect(true).toBe(true);
+  });
 });
