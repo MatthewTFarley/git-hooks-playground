@@ -4,6 +4,10 @@
   "description": "A Git Hooks playground",
   "main": "index.js",
   "devDependencies": {
-    "lint-staged": "^13.2.2"
+    "lint-staged": "^13.2.2",
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
